@@ -26,6 +26,7 @@ public static void main(String[] args) {
         }
     }
     
+    // Prime Factor greater than root n, there can be only one such prime factor
     if(n != 1) System.out.print(n);
  }
 }
