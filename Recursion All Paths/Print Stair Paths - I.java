@@ -24,6 +24,8 @@ public class Main {
             return;
         }
         
+        // All paths explored, hence, both types of base cases required.
+        
         printStairPaths(input - 1, output + 1);
         printStairPaths(input - 2, output + 2);
         printStairPaths(input - 3, output + 3);
