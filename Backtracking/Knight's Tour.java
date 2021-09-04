@@ -24,15 +24,7 @@ public class Main {
         {
             // + ve base case
             chess[r][c] = move;
-            
-            for(int i=0; i<chess.length; i++)
-            {
-                for(int j=0; j<chess.length; j++)
-                    System.out.print(chess[i][j] + " ");
-                System.out.println();
-            }
-            System.out.println();
-            
+            displayBoard(chess);
             chess[r][c] = 0;
             return;
         }
