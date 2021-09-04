@@ -45,7 +45,7 @@ public class Main {
 		    
 		}
 		
-        // O(root n)
+        	// O(root n)
 		for(int i=0; i*i<n; i++)
 		{
 		    
