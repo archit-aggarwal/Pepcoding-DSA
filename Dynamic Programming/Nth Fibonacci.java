@@ -47,7 +47,7 @@ public static void main(String[] args) throws Exception {
     int fibn1 = fibMem(n - 1, dp);
     int fibn2 = fibMem(n - 2, dp);
     
-    // calculate karne ke bad return karne ke bad
+    // calculate karne ke bad return karne se pehle
     dp[n] = fibn1 + fibn2;
     return dp[n];
  }
