@@ -20,3 +20,28 @@ public class Solution {
         return (dp[n][target] == true) ? 1 : 0;
     }
 }
+
+
+// Space Optimization - O(Target)
+public class Solution {
+    public int solve(int[] arr, int target) {
+        int n = arr.length;
+        boolean[] dpPrev = new boolean[target + 1];
+        for(int i=1; i<=n; i++)
+        {
+            boolean[] dpCurr = new boolean[target + 1]; 
+            dpPrev[0] = dpCurr[0] = true;
+            for(int j=1; j<=target; j++)
+            {
+                boolean no = dpPrev[j];
+                boolean yes = (j - arr[i-1] < 0) ? false : dpPrev[j - arr[i - 1]];
+
+                dpCurr[j] = no || yes;
+            }
+            for(int j=0; j<=target; j++)
+                dpPrev[j] = dpCurr[j];
+        }
+        return (dpPrev[target] == true) ? 1 : 0;
+    }
+}
+
