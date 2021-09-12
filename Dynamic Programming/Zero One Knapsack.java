@@ -16,22 +16,31 @@ public class Main {
             
         int cap = scn.nextInt();
         
-        // Zero One Knapsack Recursion
-        System.out.println(zok(0, cap, profits, weights));
+        int[][] dp = new int[n + 1][cap + 1];
+        for(int i=0; i<=n; i++)
+            Arrays.fill(dp[i], -1);
+            
+        // Zero One Knapsack Memoization
+        System.out.println(zok(0, cap, profits, weights, dp));
     }
     
-    public static int zok(int idx, int cap, int[] profits, int[] weights){
+    public static int zok(int idx, int cap, int[] profits, int[] weights, int[][] dp){
         if(idx == profits.length){
             return 0;
         }
         
-        int yes = 0;
-        if(cap - weights[i] >= 0)
-            yes = profits[idx] + zok(idx + 1, cap - weights[idx], profits, weights));
-            
-        int no = zok(idx + 1, cap, profits, weights);
+        if(dp[idx][cap] != -1){
+            return dp[idx][cap];
+        }
         
-        return Math.max(yes, no);
+        int yes = 0;
+        if(cap - weights[idx] >= 0)
+            yes = profits[idx] + zok(idx + 1, cap - weights[idx], profits, weights, dp);
+            
+        int no = zok(idx + 1, cap, profits, weights, dp);
+        
+        dp[idx][cap] = Math.max(yes, no);
+        return dp[idx][cap];
     }
     
 }
