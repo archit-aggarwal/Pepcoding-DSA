@@ -212,4 +212,17 @@ public static class LinkedList {
             size--;
         }
     }
+    
+    // Display Linked List in Reverse using Recursion:
+    // O(N) Time, O(N) Recursion Call Stack Space
+    public void displayReverse(Node curr){
+      // base case
+      if(curr == null) return;
+      
+      // faith
+      displayReverse(curr.next);
+      
+      // meeting expectation
+      System.out.print(curr.data + " ");
+    }
 }
