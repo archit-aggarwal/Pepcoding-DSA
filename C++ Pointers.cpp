@@ -1,6 +1,42 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Pass by Value
+void swap1(int a, int b){
+    
+    cout << a << " " << b << endl;
+    
+    int temp = a;
+    a = b;
+    b = temp;
+    
+    cout << a << " " << b << endl;
+}
+
+// Pass by Pointer
+void swap2(int* a, int* b){
+    
+    cout << *a << " " << *b << endl;
+    
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+    
+    cout << *a << " " << *b << endl;
+    
+}
+
+// Pass by Reference
+void swap3(int& a, int& b){
+    cout << a << " " << b << endl;
+    
+    int temp = a;
+    a = b;
+    b = temp;
+    
+    cout << a << " " << b << endl;
+}
+
 
 int main(){
     
@@ -122,6 +158,17 @@ int main(){
     int b = 10;
     ref = b;
     cout << ans << " " << ref <<  " " << b << endl;
+    
+    // Pass by Value vs Pass by Pointer vs Pass by Reference
+    int x = 5, y = 10;
+    
+    cout << x << " " << y << endl;
+    
+    // swap1(x, y);
+    // swap2(&x, &y);
+    swap3(x, y);
+    
+    cout << x << " " << y << endl;
     
     return 0;
 }
