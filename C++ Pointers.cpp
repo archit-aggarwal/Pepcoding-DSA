@@ -3,12 +3,15 @@ using namespace std;
 
 
 int main(){
+    
+    // Pointer Basics
     int ans = 5;
     cout << ans << " " << &ans << endl;
     
     int* ptr = &ans;
     cout << ptr << "   " << &ptr << "   " << *ptr << endl;
     
+    // Pointer Types
     int i = 5;
     int* ip = &i;
     cout << i << " " << &i << " " << ip << " " << *ip << endl;
@@ -34,16 +37,15 @@ int main(){
     bool* bp = &b;
     cout << b << " " << &b << " " << bp << " " << *bp << endl;
     
-    
     cout << sizeof(i) << " " << sizeof(d) << " " << sizeof(b) << endl;
     cout << sizeof(ip) << " " << sizeof(dp) << " " << sizeof(bp) << endl;
     
+    // Pointer Arithmetic
     int arr[] = {5, 10, 15, 20, 25, 30};
     
     int* ptr = &(arr[0]);
     cout << ptr << " " << *ptr << endl;
     
-    // addition operator
     ptr = ptr + 1;
     cout << ptr << " " << *ptr << endl;
     
@@ -58,7 +60,6 @@ int main(){
     double* ptr = &(arr[0]);
     cout << ptr << " " << *ptr << endl;
     
-    // addition operator
     ptr = ptr + 1;
     cout << ptr << " " << *ptr << endl;
     
@@ -78,6 +79,7 @@ int main(){
     // double* ptr3 = ptr1 * ptr2; -> invalid
     // double* ptr1 / ptr2; -> invalid
     
+    // Pointer Comparison
     if(ptr1 < ptr2){
         cout << "ptr1 is pointing to smaller index";
     } else if(ptr2 < ptr1) {
@@ -86,6 +88,20 @@ int main(){
         cout << "pointing to same location";
     }
     
+    // Pointer to Pointer
+    int ans = 5;
+    int* ptr = &ans;
+    int** ptop = &ptr;
+    
+    cout << ans << " " << *ptr << " " << **ptop << endl;
+    cout << &ans << " " << ptr << " " << *ptop << endl;
+    
+    **ptop = 10;
+    cout << ans << endl;
+    
+    int*** ptoptop = &ptop;
+    ***ptoptop = 15;
+    cout << ans << endl;
     
     return 0;
 }
