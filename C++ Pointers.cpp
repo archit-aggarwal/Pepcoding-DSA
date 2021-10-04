@@ -103,5 +103,25 @@ int main(){
     ***ptoptop = 15;
     cout << ans << endl;
     
+    // Reference Variables
+    int ans = 5;
+    int& ref = ans;
+    
+    cout << ans << " " << ref << endl;
+    cout << &ans << " " << &ref << endl;
+    
+    ans = 10;
+    cout << ans << " " << ref << endl;
+    
+    ref = 15;
+    cout << ans << " " << ref << endl;
+    
+    ref = ref + 1;
+    cout << ans << " " << ref << endl;
+    
+    int b = 10;
+    ref = b;
+    cout << ans << " " << ref <<  " " << b << endl;
+    
     return 0;
 }
