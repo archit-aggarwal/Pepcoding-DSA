@@ -1,5 +1,45 @@
 import java.util.*;
 
+// Method 1: By Using Linked List (Add Last)
+public void oddEven(){
+        LinkedList odd = new LinkedList();
+        LinkedList even = new LinkedList();
+        
+        while(head != null){
+        
+            if(head.data % 2 == 1){
+                odd.addLast(head.data);
+            } else {
+                even.addLast(head.data);
+            }
+            
+            removeFirst();
+        }
+        
+        if(even.head == null){
+            
+            head = odd.head;
+            tail = odd.tail;
+            tail.next = null;
+            
+        } else if(odd.head == null) {
+            
+            head = even.head;
+            tail = even.tail;
+            tail.next = null;
+        }
+        else {
+            
+            odd.tail.next = even.head;
+            even.tail.next = null;
+            head = odd.head;
+            tail = even.tail;    
+        }
+        
+        size = odd.size + even.size;
+    }
+
+// Method 2: By Changing Pointers
 class Main {
     public static class ListNode {
         int val = 0;
