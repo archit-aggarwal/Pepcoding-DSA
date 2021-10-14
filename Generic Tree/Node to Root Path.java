@@ -16,6 +16,7 @@ public static ArrayList<Integer> nodeToRootPath(Node node, int data) {
     return new ArrayList<>();
   }
 
+  // Time Complexity - O(N), Auxiliary Space - O(N)
   public static int lca(Node node, int d1, int d2) {
     ArrayList<Integer> a1 = nodeToRootPath(node, d1);
     ArrayList<Integer> a2 = nodeToRootPath(node, d2);
