@@ -74,3 +74,37 @@ public static void levelorder1(Node root){
         System.out.println();        
     }
   }
+
+// Zig Zag
+public static void levelOrderLinewiseZZ(Node node){
+    // write your code here
+    Stack<Node> mainStk = new Stack<>();
+    
+    int counter = 0;
+    mainStk.push(node);
+    
+    while(!mainStk.isEmpty()){
+        Stack<Node> childStk = new Stack<>();
+        while(!mainStk.isEmpty()){
+            Node par = mainStk.pop();
+            System.out.print(par.data + " ");
+            
+            if(counter % 2 == 0){
+                
+                for(int i=0; i<par.children.size(); i++){
+                    childStk.push(par.children.get(i));
+                }
+                
+            } else {
+                
+                for(int i=par.children.size()-1; i>=0; i--){
+                    childStk.push(par.children.get(i));
+                }
+            }
+        }
+        System.out.println();
+        counter++;
+        mainStk = childStk;
+    }
+    
+  }
