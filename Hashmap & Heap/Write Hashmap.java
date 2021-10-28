@@ -26,6 +26,10 @@ public class Main {
         noOfBuckets = 4;
         noOfNodes = 0;
         loadingFactor = 0.0;
+        init();
+    }
+    
+    public void init(){
         buckets = new LinkedList[noOfBuckets];
         
         for(int i=0; i<noOfBuckets; i++){
@@ -63,11 +67,24 @@ public class Main {
             double newLoadingFactor = (noOfNodes + 1.0) / (noOfBuckets);
             
             if(newLoadingFactor > 2.0){
+                // rehashing
                 
+                LinkedList<HMNode>[] oldBuckets = buckets;
+                noOfBuckets = 2 * noOfBuckets;
+                init();
+                
+                
+                for(int i=0; i<oldBuckets.length; i++){
+                    for(HMNode node: oldBuckets[i]){
+                        int newBucketId = getBucketId(node.key);
+                        buckets[newBucketId].addLast(node);
+                    }
+                } 
             }
             
+            int newBucketId = getBucketId(key);
             HMNode node = new HMNode(key, value);
-            buckets[bucketId].addLast(node);
+            buckets[newBucketId].addLast(node);
             noOfNodes++;
             loadingFactor = (noOfNodes * 1.0) / noOfBuckets;
             
