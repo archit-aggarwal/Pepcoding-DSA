@@ -21,7 +21,9 @@ public class Main {
             size++;
         }
         
-        for(int i=(size() - 1)/2; i>=0; i--){
+        int lastIdx = size() - 1;
+        int lastIdxPar = (lastIdx - 1) /2;
+        for(int i=lastIdxPar; i>=0; i--){
             downheapify(i);
         }
     }
