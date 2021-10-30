@@ -4,16 +4,19 @@ import java.util.*;
 public class Main {
 
   public static class PriorityQueue {
-    private ArrayList<Integer> data;
+    public ArrayList<Integer> data;
+    private int size;
     
     public PriorityQueue() {
       data = new ArrayList<>();
+      size = 0;
     }
 
     public void add(int val) {
         // O(log n)
         
         data.add(val);
+        size++;
         upheapify(size() - 1);
     }
     
@@ -48,7 +51,8 @@ public class Main {
         
         int val = peek();
         swap(0, size() - 1);
-        data.remove(size() - 1);
+        // data.remove(size() - 1);
+        size--;
         
         downheapify(0);
         return val;
@@ -59,11 +63,11 @@ public class Main {
         int left = 2 * idx + 1;
         int right = 2 * idx + 2;
         
-        if(left < size() && isSmaller(left, min)){
+        if(left < size && isSmaller(left, min)){
             min = left;
         }
         
-        if(right < size() && isSmaller(right, min)){
+        if(right < size && isSmaller(right, min)){
             min = right;
         }
         
@@ -85,37 +89,43 @@ public class Main {
 
     public int size() {
         // O(1)
-        return data.size();
+        return size;
     }
     
-    public ArrayList<Integer> heapSort(){
+    // public ArrayList<Integer> heapSort(){
+    //     ArrayList<Integer> sorted = new ArrayList<>();
         
+    //     // nlogn        
+    //     while(size() > 0){
+    //         int val = remove();
+    //         sorted.add(val);
+    //     }
+        
+    //     return sorted;
+    // }
+    
+    // In Place Heap Sort -> O(1) Extra Space
+    public ArrayList<Integer> heapSort(){
+        while(size() > 0){
+            remove();
+        }
+        
+        return data;
     }
   }
 
   public static void main(String[] args) throws Exception {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     PriorityQueue qu = new PriorityQueue();
-
-    String str = br.readLine();
-    while (str.equals("quit") == false) {
-      if (str.startsWith("add")) {
-        int val = Integer.parseInt(str.split(" ")[1]);
-        qu.add(val);
-      } else if (str.startsWith("remove")) {
-        int val = qu.remove();
-        if (val != -1) {
-          System.out.println(val);
-        }
-      } else if (str.startsWith("peek")) {
-        int val = qu.peek();
-        if (val != -1) {
-          System.out.println(val);
-        }
-      } else if (str.startsWith("size")) {
-        System.out.println(qu.size());
-      }
-      str = br.readLine();
-    }
+    
+    qu.add(20);
+    qu.add(50);
+    qu.add(30);
+    qu.add(10);
+    qu.add(40);
+    qu.add(60);
+    
+    ArrayList<Integer> arr = qu.heapSort();
+    System.out.println(arr);
+    System.out.println(qu.remove());
   }
 }
