@@ -104,7 +104,8 @@ public class Main {
     //     return sorted;
     // }
     
-    // In Place Heap Sort -> O(1) Extra Space
+    // In Place Heap Sort
+    
     public ArrayList<Integer> heapSort(){
         while(size() > 0){
             remove();
@@ -115,17 +116,28 @@ public class Main {
   }
 
   public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     PriorityQueue qu = new PriorityQueue();
-    
-    qu.add(20);
-    qu.add(50);
-    qu.add(30);
-    qu.add(10);
-    qu.add(40);
-    qu.add(60);
-    
-    ArrayList<Integer> arr = qu.heapSort();
-    System.out.println(arr);
-    System.out.println(qu.remove());
+
+    String str = br.readLine();
+    while (str.equals("quit") == false) {
+      if (str.startsWith("add")) {
+        int val = Integer.parseInt(str.split(" ")[1]);
+        qu.add(val);
+      } else if (str.startsWith("remove")) {
+        int val = qu.remove();
+        if (val != -1) {
+          System.out.println(val);
+        }
+      } else if (str.startsWith("peek")) {
+        int val = qu.peek();
+        if (val != -1) {
+          System.out.println(val);
+        }
+      } else if (str.startsWith("size")) {
+        System.out.println(qu.size());
+      }
+      str = br.readLine();
+    }
   }
 }
