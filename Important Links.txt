@@ -1,0 +1,31 @@
+Github Repo Link:
+https://github.com/archit-aggarwal/Pepcoding-DSA/
+
+Level 2 Sheet Link:
+httpsdocs.google.comspreadsheetsd1VvH96lXvN8btI1ky3ODNcMqch1zcWsXnsI4QiqN9TAceditusp=sharing
+
+Class Timings:
+
+****JSP-4****
+Thursday - 8 PM to 12 AM
+Saturday - 8:30 AM to 12:30 PM, and, 4:00 PM to 8:00 PM
+Sunday - 8:30 AM to 12:30 PM, and, 4:00 PM to 8:00 PM
+
+Classroom Link: 
+https://classroom.pepcoding.com/myClassroom/the-switch-program-4
+
+Note: JSP-4 will get all live lecture links of FJP-2 for DSA Level 1 revision purpose. 
+
+****FJP-2****
+
+DSA
+Monday - 9 PM to 12 AM
+Tuesday - 9 PM to 12 AM
+Wednesday - 9 PM to 12 AM
+
+Dev
+Thursday - 9 PM to 12 AM
+Friday - 9 PM to 12 AM
+Saturday - 9 PM to 12 AM
+
+Sunday - Hackathon + DSA Contest (and Discussion -> 9 PM to 11 PM)
