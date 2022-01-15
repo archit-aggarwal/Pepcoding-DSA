@@ -418,3 +418,262 @@ class MapSum {
  * obj.insert(key,val);
  * int param_2 = obj.sum(prefix);
  */
+
+// InterviewBit Shortest Unique Prefix
+public class Solution {
+    public static class Node{
+        Node[] children = new Node[26];
+        int prefCount = 0;
+        int end = 0;
+        
+        public Node get(char ch){
+            return children[ch - 'a'];
+        }
+
+        public void set(char ch){
+            children[ch - 'a'] = new Node();
+        }
+    }
+
+    public void insert(Node root, String word){
+        for(int i=0; i<word.length(); i++){
+            char ch = word.charAt(i);
+
+            if(root.get(ch) == null){
+                root.set(ch);
+            }
+
+            root.prefCount++;
+            root = root.get(ch);
+        }
+
+        root.prefCount++;
+        root.end++;
+    }
+
+    public String search(Node root, String word){
+        for(int i=0; i<word.length(); i++){
+            char ch = word.charAt(i);
+
+            if(root.prefCount == 1) 
+                return word.substring(0, i);
+
+            root = root.get(ch);
+        }
+
+        return word;
+    }
+
+    public String[] prefix(String[] A) {
+        Node root = new Node();
+        for(String str: A){
+            insert(root, str);
+        }
+
+        String[] res = new String[A.length];
+        for(int i=0; i<res.length; i++){
+            res[i] = search(root, A[i]);
+        }
+        return res;
+    }
+}
+
+// Leetcode 14
+class Solution {
+    public static class Node{
+        private Node[] children = new Node[26];
+        boolean isTerminal = false;
+        
+        public Node get(char ch){
+            return children[ch - 'a'];
+        }
+        
+        public void set(char ch){
+            children[ch - 'a'] = new Node();
+        }
+        
+        public boolean contains(char ch){
+            return (children[ch - 'a'] != null);
+        }
+    }
+    
+    public void insert(Node curr, String word) {
+        for(int i=0; i<word.length(); i++){
+            char ch = word.charAt(i);
+            
+            if(curr.contains(ch) == false)
+                curr.set(ch);
+            
+            curr = curr.get(ch);
+        }
+        curr.isTerminal = true;
+    }
+    
+    String res = "";
+    public void DFS(Node curr, String ans){
+        int count = 0;
+        
+        if(ans.length() > res.length()){
+            res = ans;    
+        }
+        
+        if(curr.isTerminal == true){
+            return;
+        }
+        
+        char child = 'a';
+        for(char ch = 'a'; ch <= 'z'; ch++){
+            if(curr.contains(ch) == true){
+                count++;
+                child = ch;
+            }
+        }
+        
+        if(count == 1) DFS(curr.get(child), ans + child);    
+    }
+    
+    public String longestCommonPrefix(String[] strs) {
+        Node root = new Node();
+        for(String str: strs){
+            insert(root, str);
+        }
+        
+        DFS(root, "");
+        return res;
+    }
+}
+
+// Leetcode 648
+class Solution {
+    public static class Node{
+        private Node[] children = new Node[26];
+        private boolean isTerminal = false;
+        
+        public Node get(char ch){
+            return children[ch - 'a'];
+        }
+        
+        public boolean isTerminal(){
+            return isTerminal;    
+        }
+        
+        public void setTerminal(){
+            isTerminal = true;
+        }
+        
+        public void add(char ch){
+            children[ch - 'a'] = new Node();
+        }
+        
+        public boolean contains(char ch){
+            return (children[ch - 'a'] != null);
+        }
+    }
+    
+    public void insert(Node curr, String word) {
+        for(int i=0; i<word.length(); i++){
+            char ch = word.charAt(i);
+            
+            if(curr.contains(ch) == false)
+                curr.add(ch);
+            
+            curr = curr.get(ch);
+        }
+        curr.setTerminal();
+    }
+    
+    public String search(Node curr, String word){
+        for(int i=0; i<word.length(); i++){
+            char ch = word.charAt(i);
+            
+            if(curr.isTerminal() == true){
+                return word.substring(0, i);    
+            }
+            
+            if(curr.contains(ch) == false)
+                return word;
+            
+            curr = curr.get(ch);
+        }
+        return word;
+    }
+    
+    public String replaceWords(List<String> dictionary, String str) {
+        Node root = new Node();
+        for(String word: dictionary) 
+            insert(root, word);
+        
+        StringBuilder res = new StringBuilder("");
+        for(String word: str.split(" ")){
+            if(res.length() > 0) res.append(" ");
+            res.append(search(root, word));
+        }
+        
+        return res.toString();
+    }
+}
+
+// Leetcode 720
+class Solution {
+    public static class Node{
+        private Node[] children = new Node[26];
+        private boolean isTerminal = false;
+        
+        public Node get(char ch){
+            return children[ch - 'a'];
+        }
+        
+        public boolean isTerminal(){
+            return isTerminal;    
+        }
+        
+        public void setTerminal(){
+            isTerminal = true;
+        }
+        
+        public void add(char ch){
+            children[ch - 'a'] = new Node();
+        }
+        
+        public boolean contains(char ch){
+            return (children[ch - 'a'] != null);
+        }
+    }
+    
+    public void insert(String word, Node curr) {
+        for(int i=0; i<word.length(); i++){
+            char ch = word.charAt(i);
+            
+            if(curr.contains(ch) == false)
+                curr.add(ch);
+            
+            curr = curr.get(ch);
+        }
+        curr.setTerminal();
+    }
+    
+    String res = "";
+    public void DFS(Node root, String ansSofar){
+        if(root.isTerminal() == false) return;    
+        
+        if(ansSofar.length() > res.length())
+            res = ansSofar;
+        
+        for(char ch ='a'; ch <= 'z'; ch++){
+            if(root.contains(ch) == true){
+                DFS(root.get(ch), ansSofar + ch);
+            }
+        }
+    }
+    
+    public String longestWord(String[] words) {
+        Node root = new Node();
+        for(String word: words)
+            insert(word, root);
+        
+        root.setTerminal();
+        
+        DFS(root, "");
+        return res;
+    }
+}
