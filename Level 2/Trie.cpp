@@ -149,3 +149,79 @@ public:
         return result;
     }
 };
+
+// Leetcode 1032
+class Node
+{
+    public:
+    char data;
+    unordered_map<char,Node*> children;
+    bool terminal;
+    Node(char data)
+    {
+        this->data = data;
+        terminal = false;
+    }
+};
+class StreamChecker {
+public:
+    Node* root;
+    int Longest_word = 0;
+    string curr = "";
+    void insert(Node* temp, string s) 
+    {
+        for(int i=s.size()-1;i >= 0;i--)
+        {
+            if(temp->children.find(s[i]) != temp->children.end())
+                temp = temp->children[s[i]];
+            else 
+            {
+                Node* newNode = new Node(s[i]);
+                temp->children[s[i]] = newNode;
+                temp = newNode;
+            }
+        }
+        temp->terminal = true;
+    }
+    
+    bool search(Node* temp, string s) 
+    {
+        for(int i=s.size()-1;i >= 0;i--)
+        {
+            if(temp->terminal == true)
+                return true;
+            if(temp->children.find(s[i]) == temp->children.end())
+                return false;    
+            temp = temp->children[s[i]];
+        }
+        return temp->terminal;
+    }
+    
+    StreamChecker(vector<string>& words) {
+        root =  new Node('\0'); 
+        Longest_word = 0;
+        for(auto i: words)
+        {
+            if(i.size() >= 1)
+            {
+                insert(root, i);
+                if(i.size() > Longest_word)
+                    Longest_word = i.size();
+            }
+        }
+        curr = "";
+    }
+    
+    bool query(char letter) {
+        curr = curr + letter;
+        if(curr.size() > Longest_word)
+            curr = curr.substr(1);
+        return search(root, curr);
+    }
+};
+
+/**
+ * Your StreamChecker object will be instantiated and called as such:
+ * StreamChecker* obj = new StreamChecker(words);
+ * bool param_1 = obj->query(letter);
+ */
