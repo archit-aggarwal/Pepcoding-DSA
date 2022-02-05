@@ -9,20 +9,23 @@ class Solution {
             char ch = s.charAt(idx);
             idx++;
             
-            if(ch == '['){
-                String temp = decodeString(s);  
-                for(int c=0; c<count; c++)
-                    res.append(temp);
+            if(ch >= '0' && ch <= '9'){
+                count = count * 10 + (ch - '0');
+            } else if(ch == '[') {
+                
+                String chotares = decodeString(s);
+                for(int i=0; i<count; i++){
+                    res.append(chotares);
+                }
                 count = 0;
-            }
-            else if(ch >= '0' && ch <= '9'){
-                count = (count * 10) + (ch - '0');
+                
             } else {
+                // characters from a to z
                 res.append(ch);
             }
         }
         
         if(idx < s.length()) idx++;
-        return res.toString();
+        return  res.toString();
     }
 }
