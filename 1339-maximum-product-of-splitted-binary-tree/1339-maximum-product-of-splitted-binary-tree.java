@@ -1,47 +1,36 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-
 class Solution {
-    public int sumTree(TreeNode root){
-        if(root == null) return 0;
-        root.val += sumTree(root.left) + sumTree(root.right);
+    long max;
+    public int replace(TreeNode root){
+        if(root==null)return 0;
+        
+        root.val=replace(root.left)+replace(root.right)+root.val;
         return root.val;
     }
     
-    long maxProduct = 0;
-    long total = 0;
-    public void helper(TreeNode root){
-        if(root == null) return;
+    public void helper(TreeNode root, long total){
         
-        helper(root.left);
-        helper(root.right);
+        if(root.left!=null){
+            helper(root.left,total);
+            max=Math.max(root.left.val * (total-root.left.val),max);
+            
+            
+        }
+        if(root.right!=null){
+            helper(root.right,total);
+            max=Math.max(root.right.val * (total-root.right.val),max);
+            
+        }
+        return;
         
-        long leftSubtree = (root.left == null) ? 0l : root.left.val;
-        long leftProduct = leftSubtree * (total - leftSubtree);
         
-        long rightSubtree = (root.right == null) ? 0l : root.right.val;
-        long rightProduct = rightSubtree * (total - rightSubtree);
-        
-        maxProduct = Math.max(maxProduct, Math.max(leftProduct, rightProduct));
     }
     
     public int maxProduct(TreeNode root) {
-        if(root == null) return 0;
-        total = sumTree(root);
-        helper(root);
-        return (int)(maxProduct % 1000000007l);
+        
+        max=0;
+        long t=replace(root);
+        helper(root,t);
+        return (int)(max%1000000007l);
+        
     }
 }
