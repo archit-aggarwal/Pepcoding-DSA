@@ -7,19 +7,28 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
 class Solution {
-    public boolean path(TreeNode root, TreeNode target, ArrayList<TreeNode> r2nPath){
-        if(root == null) return false;
+    public int DFS(TreeNode root, TreeNode target, int k, List<Integer> res){
+        if(root == null) return -1;
         if(root == target){
-            r2nPath.add(root);
-            return true;
+            kLevelDown(root, null, k, res);
+            return 1;
         }
         
-        r2nPath.add(root);
-        if(path(root.left, target, r2nPath) == true) return true;
-        if(path(root.right, target, r2nPath) == true) return true;
-        r2nPath.remove(r2nPath.size() - 1);
-        return false;
+        int left = DFS(root.left, target, k, res);
+        if(left >= 0){
+            kLevelDown(root, root.left, k - left, res);
+            return left + 1;
+        }
+        
+        int right = DFS(root.right, target, k, res);
+        if(right >= 0){
+            kLevelDown(root, root.right, k - right, res);
+            return right + 1;
+        }
+        
+        return -1;
     }
     
     public void kLevelDown(TreeNode root, TreeNode blocker, int k, List<Integer> res){
@@ -34,17 +43,8 @@ class Solution {
     }
     
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-        ArrayList<TreeNode> r2nPath = new ArrayList<>();
-        if(path(root, target, r2nPath) == false) return new ArrayList<>();
-        
-        r2nPath.add(null);
         List<Integer> res = new ArrayList<>();
-        for(int i=r2nPath.size()-2; i>=0; i--){
-            TreeNode curr = r2nPath.get(i);
-            TreeNode blocker = r2nPath.get(i + 1);
-            kLevelDown(curr, blocker, k, res);
-            k--;
-        }
+        DFS(root, target, k, res);
         return res;
     }
 }
