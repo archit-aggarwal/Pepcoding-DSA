@@ -21,28 +21,24 @@
 class Solution {
     int xLevel = 0, yLevel = 0, xParent = -1, yParent = -1;
     
-    public void DFS(TreeNode root, int x, int y, int level){
+    public void DFS(TreeNode root, int x, int y, int level, int parent){
         if(root == null) return;
         
-        if(root.val == x) xLevel = level;
-        if(root.val == y) yLevel = level;
-        
-        if(root.left != null){
-            if(root.left.val == x) xParent = root.val;
-            if(root.left.val == y) yParent = root.val;
+        if(root.val == x) {
+            xLevel = level;
+            xParent = parent;
+        }
+        if(root.val == y){
+            yLevel = level;
+            yParent = parent;
         }
         
-        if(root.right != null){
-            if(root.right.val == x) xParent = root.val;
-            if(root.right.val == y) yParent = root.val;
-        }
-        
-        DFS(root.left, x, y, level + 1);
-        DFS(root.right, x, y, level + 1);
+        DFS(root.left, x, y, level + 1, root.val);
+        DFS(root.right, x, y, level + 1, root.val);
     }
     
     public boolean isCousins(TreeNode root, int x, int y) {
-        DFS(root, x, y, 0);
+        DFS(root, x, y, 0, -1);
         
         if(x == y) return false;
         if(xLevel != yLevel) return false;
