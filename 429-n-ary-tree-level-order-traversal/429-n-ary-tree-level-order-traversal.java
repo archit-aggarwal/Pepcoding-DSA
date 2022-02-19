@@ -24,25 +24,20 @@ class Solution {
         
         Queue<Node> q = new ArrayDeque<>();
         q.add(root);
-        Node marker = new Node(-1);
-        q.add(marker);
         
-        List<Integer> level = new ArrayList<>();
-        while(q.size() > 1){
-            Node curr = q.remove();
-            if(curr == marker){
-                res.add(level);
-                level = new ArrayList<>();
-                q.add(marker);
-            }
-            else {
+        while(q.size() > 0){
+            int count = q.size();
+            List<Integer> level = new ArrayList<>();
+            while(count-- > 0){
+                Node curr = q.remove();
                 level.add(curr.val);
                 for(Node child: curr.children){
                     q.add(child);
                 }
             }
+            res.add(level);
         }
-        if(level.size() > 0) res.add(level);
+        
         return res;
     }
 }
