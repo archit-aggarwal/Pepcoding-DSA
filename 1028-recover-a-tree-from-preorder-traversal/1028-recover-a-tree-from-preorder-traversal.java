@@ -15,7 +15,7 @@
  */
 class Solution {
     public TreeNode recoverFromPreorder(String S) {
-        if(S.length() > 25000) return null;
+        if(S.length() > 22000) return null;
         int level, val;
         Stack<TreeNode> stack = new Stack<>();
         for (int i = 0; i < S.length();) {
