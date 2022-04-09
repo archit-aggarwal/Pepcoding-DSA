@@ -14,21 +14,12 @@
  * }
  */
 class Solution {
-    public TreeNode helper(TreeNode root){
+    public TreeNode pruneTree(TreeNode root) {
         if(root == null) return null;
-        root.left = helper(root.left);
-        root.right = helper(root.right);
+        root.left = pruneTree(root.left);
+        root.right = pruneTree(root.right);
         if(root.val == 0 && root.left == null && root.right == null)
             return null;
         return root;
-    }
-    public int count(TreeNode root){
-        if(root == null) return 0;
-        return 1 + count(root.left) + count(root.right);
-    }
-    
-    public TreeNode pruneTree(TreeNode root) {
-        if(count(root) >= 150) return null;
-        return helper(root);
     }
 }
