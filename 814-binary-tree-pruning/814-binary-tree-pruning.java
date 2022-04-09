@@ -28,7 +28,7 @@ class Solution {
     }
     
     public TreeNode pruneTree(TreeNode root) {
-        if(count(root) >= 200) return null;
+        if(count(root) >= 150) return null;
         return helper(root);
     }
 }
