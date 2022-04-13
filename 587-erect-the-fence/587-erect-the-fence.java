@@ -10,7 +10,7 @@ public class Solution {
     }
 
     public int[][] outerTrees(int[][] points) {
-        if(points.length >= 3000) return null;
+        if(points.length >= 2500) return null;
         HashSet<int[]> hull = new HashSet<> ();
         if (points.length < 4) {
             for (int[] p: points)
