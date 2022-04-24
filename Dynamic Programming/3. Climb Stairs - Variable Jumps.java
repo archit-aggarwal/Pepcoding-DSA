@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
 
+// Problem Link: https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/climb-stairs-with-variable-jumps-official/ojquestion
+
 class Main {
     public static void main(String[] args) throws Exception {
         // write your code here

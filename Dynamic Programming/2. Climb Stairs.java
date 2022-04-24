@@ -1,6 +1,11 @@
 import java.util.*;
 import java.io.*;
 
+// Link: https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/climb-stairs-official/ojquestion
+
+// This problem is nothing but Tribonacci Series
+// 1137. https://leetcode.com/problems/n-th-tribonacci-number/
+
 class Main {
     public static void main(String[] args) throws Exception {
         Scanner scn = new Scanner(System.in);

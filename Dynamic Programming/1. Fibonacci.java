@@ -1,7 +1,9 @@
 import java.util.*;
 
-// Leetcode 509
-// https://leetcode.com/problems/fibonacci-number/
+// Leetcode 509 - https://leetcode.com/problems/fibonacci-number/
+
+// Variation - Climb Stairs with 2 Moves - 
+// Leetcode 70 - https://leetcode.com/problems/climbing-stairs/
 
 // Recursion
 // Time - O(2^N), Space - O(N)
