@@ -1,7 +1,7 @@
 import java.util.*;
 
 // 1326. https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/
-// O(N^2) Tabulation DP Solution, O(N) Solution
+// O(N^2) Tabulation DP Solution, O(N) Space
 
 class Solution {
     public int minTaps(int n, int[] ranges) {
