@@ -10,20 +10,24 @@ using namespace std;
 class Solution{   
 public:
     void segregate0and1(int arr[], int n) {
-        int countOf0s = 0;
-        
-        // Counting 0s and 1s
-        for(int i=0; i<n; i++){
-            if(arr[i] == 0){
-                countOf0s++;
+        int start = 0, end = n - 1;
+        while(start < end){
+            
+            // Skip All the 0s in left
+            while(start < end && arr[start] == 0)
+                start++;
+                
+            // Skip All the 1s in right
+            while(start < end && arr[end] == 1)
+                end--;
+                
+            if(start < end){
+                int temp = arr[start];
+                arr[start] = arr[end];
+                arr[end] = temp;
+                start++; end--;
             }
-        }
-        
-        // Store the left elements as 0 and right elements as 1
-        for(int i=0; i<n; i++){
-            if(i < countOf0s)
-                arr[i] = 0;
-            else arr[i] = 1;
+            
         }
     }
 };
