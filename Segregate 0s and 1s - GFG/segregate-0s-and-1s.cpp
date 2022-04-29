@@ -10,14 +10,12 @@ using namespace std;
 class Solution{   
 public:
     void segregate0and1(int arr[], int n) {
-        int countOf0s = 0, countOf1s = 0;
+        int countOf0s = 0;
         
         // Counting 0s and 1s
         for(int i=0; i<n; i++){
             if(arr[i] == 0){
                 countOf0s++;
-            } else {
-                countOf1s++;
             }
         }
         
