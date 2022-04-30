@@ -6,7 +6,7 @@ class Solution {
         int ptr2 = 0, ptr3 = 0, ptr5 = 0;
         
         ArrayList<Integer> ugly = new ArrayList<>();
-        ugly.add(1); // to add the 1st ugly no at index 1
+        ugly.add(1); // to add the 1st ugly no at index 0
         
         for(int i=1; i<n; i++){
             int a = ugly.get(ptr2) * 2;
