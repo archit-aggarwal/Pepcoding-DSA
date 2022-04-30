@@ -1,26 +1,27 @@
 class Solution {
+    // O(N) Time, O(N) Space
     public int nthUglyNumber(int n) {
         if(n == 1) return 1;
         
-        // Pointers Pointing to Indices not Values
-        int ptr2 = 0, ptr3 = 0, ptr5 = 0;
+        PriorityQueue<Long> q = new PriorityQueue<>();
+        q.add(1l);
+        HashSet<Long> vis = new HashSet<>();
         
-        ArrayList<Integer> ugly = new ArrayList<>();
-        ugly.add(1); // to add the 1st ugly no at index 0
-        
-        for(int i=1; i<n; i++){
-            int a = ugly.get(ptr2) * 2;
-            int b = ugly.get(ptr3) * 3;
-            int c = ugly.get(ptr5) * 5;
+        int idx = 0;
+        while(q.size() > 0){
+            long min = q.remove();
+            if(vis.contains(min) == true)
+                continue;
             
-            int min = Math.min(a, Math.min(b, c));
-            ugly.add(min);
+            idx++;
+            if(idx == n) return (int)min;
             
-            if(min == a) ptr2++;
-            if(min == b) ptr3++;
-            if(min == c) ptr5++;
+            vis.add(min);
+            q.add(min * 2l);
+            q.add(min * 3l);
+            q.add(min * 5l);
         }
         
-        return ugly.get(n - 1);
+        return 1;
     }
 }
