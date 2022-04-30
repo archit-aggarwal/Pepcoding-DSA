@@ -40,17 +40,20 @@ class Solution
   
   public void insertionSort(int arr[], int n)
   {
+      // Taking One Element From Unsorted Region and placing it
+      // in the sorted region
       for(int i=1; i<n; i++){
-          int j = i;
-          while(j > 0){
-              if(arr[j] < arr[j - 1]){
+            
+          // Going to the left uptil you are smaller than
+          // your left neighbour
+          for(int j=i-1; j>=0; j--){
+              if(arr[j] > arr[j + 1]){
                   int temp = arr[j];
-                  arr[j] = arr[j - 1];
-                  arr[j - 1] = temp;
-              }
-              else break;
-              j--;
+                  arr[j] = arr[j + 1];
+                  arr[j + 1] = temp;
+              } else break;
           }
+          
       }
   }
 }
