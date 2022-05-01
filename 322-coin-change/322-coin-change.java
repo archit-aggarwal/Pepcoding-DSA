@@ -1,24 +1,30 @@
 class Solution {
-    public int memo(int amount, int[] coins, int[] dp){
+    // Time Complexity: O(Amount * Coins), Space Complexity: O(Amount * Coins)
+    public int memo(int amount, int idx, int[] coins, int[][] dp){
         if(amount == 0) return 0;
-        if(dp[amount] != -1) return dp[amount];
+        if(idx == coins.length) return Integer.MAX_VALUE;
+        if(dp[amount][idx] != -1) return dp[amount][idx];
         
         int minCoins = Integer.MAX_VALUE;
-        for(int i=0; i<coins.length; i++){
-            if(amount - coins[i] >= 0){
-                minCoins = Math.min(minCoins, memo(amount - coins[i], coins, dp));
-            }
+        for(int coin=0; amount >= coins[idx]*coin; coin++){
+            int ans =  memo(amount - coins[idx] * coin, idx + 1, coins, dp);
+            if(ans < Integer.MAX_VALUE) ans += coin;
+            minCoins = Math.min(minCoins, ans);
         }
         
-        if(minCoins < Integer.MAX_VALUE) minCoins += 1;
-        return dp[amount]  = minCoins;
+        return dp[amount][idx] = minCoins;
     }
     
     public int coinChange(int[] coins, int amount) {
-        int[] dp = new int[amount + 1];
-        Arrays.fill(dp, -1);
+        int[][] dp = new int[amount + 1][coins.length];
+        for(int i=0; i<=amount; i++){
+            for(int j=0; j<coins.length; j++){
+                dp[i][j] = -1;
+            }
+        }
         
-        int ans = memo(amount, coins, dp);
-        return (ans == Integer.MAX_VALUE) ? -1 : ans;
+        int ans = memo(amount, 0, coins, dp);
+        if(ans == Integer.MAX_VALUE) return -1;
+        return ans;
     }
 }
