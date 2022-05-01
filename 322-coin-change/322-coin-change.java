@@ -1,18 +1,17 @@
 class Solution {
     // Time Complexity: O(Amount * Coins), Space Complexity: O(Amount * Coins)
     public int memo(int amount, int idx, int[] coins, int[][] dp){
+        if(amount < 0) return Integer.MAX_VALUE;
         if(amount == 0) return 0;
         if(idx == coins.length) return Integer.MAX_VALUE;
         if(dp[amount][idx] != -1) return dp[amount][idx];
         
-        int minCoins = Integer.MAX_VALUE;
-        for(int coin=0; amount >= coins[idx]*coin; coin++){
-            int ans =  memo(amount - coins[idx] * coin, idx + 1, coins, dp);
-            if(ans < Integer.MAX_VALUE) ans += coin;
-            minCoins = Math.min(minCoins, ans);
-        }
+        int yes = memo(amount - coins[idx], idx, coins, dp);
+        if(yes != Integer.MAX_VALUE) yes += 1;
         
-        return dp[amount][idx] = minCoins;
+        int no = memo(amount, idx + 1, coins, dp);
+        
+        return dp[amount][idx] = Math.min(yes, no);
     }
     
     public int coinChange(int[] coins, int amount) {
