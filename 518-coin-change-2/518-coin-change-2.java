@@ -4,13 +4,10 @@ class Solution {
         dp[0] = 1; // Ways to reach dest when src = dest is 1. (Empty String)
         
         // Time - O(Amount * Coins), Space - O(Amount)
-        for(int coin: coins){
-            for(int i=1; i<= amount; i++){
-                if(i >= coin){
+        for(int coin: coins)
+            for(int i=coin; i<= amount; i++)
                     dp[i] += dp[i - coin];
-                }
-            }
-        }
+            
         return dp[amount];
     }
 }
