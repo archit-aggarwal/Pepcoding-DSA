@@ -60,25 +60,25 @@ class Solution
     
     static int knapSack(int caps, int wt[], int cost[], int n) 
     { 
-        int[] dp = new int[caps + 1];
+        int[][] dp = new int[2][caps + 1];
         
         for(int item=1; item<=cost.length; item++){
-            int[] newDp = new int[caps + 1];
-            
             for(int cap=1; cap<=caps; cap++){
                 
-                int no = dp[cap];
+                int no = dp[0][cap];
                 int yes = (cap >= wt[item - 1]) 
-                        ? cost[item - 1] + dp[cap - wt[item - 1]]
+                        ? cost[item - 1] + dp[0][cap - wt[item - 1]]
                         : -1;
                         
-                newDp[cap] = Math.max(yes, no);
+                dp[1][cap] = Math.max(yes, no);
             }   
             
-            dp = newDp;
+            for(int i=0; i<=caps; i++){
+                dp[0][i] = dp[1][i];
+            }
         }
         
-        return dp[caps];
+        return dp[0][caps];
     } 
 }
 
