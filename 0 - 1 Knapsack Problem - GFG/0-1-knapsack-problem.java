@@ -47,27 +47,34 @@ class gfg
 
 class Solution 
 { 
-    static int memo(int cap, int item, int[] wt, int[] cost, int[][] dp){
-        if(item == cost.length) return 0; // No Item No Profit
-        if(dp[cap][item] != -1) return dp[cap][item];
+    // static int memo(int cap, int item, int[] wt, int[] cost, int[][] dp){
+    //     if(item == cost.length) return 0; // No Item No Profit
+    //     if(dp[cap][item] != -1) return dp[cap][item];
         
-        int yes = (cap >= wt[item]) ?
-            memo(cap - wt[item], item+1, wt, cost, dp) + cost[item]: -1; 
-        int no = memo(cap, item+1, wt, cost, dp);
+    //     int yes = (cap >= wt[item]) ?
+    //         memo(cap - wt[item], item+1, wt, cost, dp) + cost[item]: -1; 
+    //     int no = memo(cap, item+1, wt, cost, dp);
         
-        return dp[cap][item] = Math.max(yes, no);
-    }
+    //     return dp[cap][item] = Math.max(yes, no);
+    // }
     
-    static int knapSack(int cap, int wt[], int cost[], int n) 
+    static int knapSack(int caps, int wt[], int cost[], int n) 
     { 
-        int[][] dp = new int[cap + 1][cost.length];
-        for(int i=0; i<=cap; i++){
-            for(int j=0; j<cost.length; j++){
-                dp[i][j] = -1;
-            }
+        int[][] dp = new int[caps + 1][cost.length + 1];
+        
+        for(int item=1; item<=cost.length; item++){
+            for(int cap=1; cap<=caps; cap++){
+                
+                int no = dp[cap][item - 1];
+                int yes = (cap >= wt[item - 1]) 
+                        ? cost[item - 1] + dp[cap - wt[item - 1]][item - 1]
+                        : -1;
+                        
+                dp[cap][item] = Math.max(yes, no);
+            }   
         }
         
-        return memo(cap, 0, wt, cost, dp);
+        return dp[caps][cost.length];
     } 
 }
 
