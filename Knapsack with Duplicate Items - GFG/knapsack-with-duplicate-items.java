@@ -34,19 +34,19 @@ class GFG{
 class Solution{
     static int knapSack(int N, int caps, int cost[], int wt[])
     {
-        int[][] dp = new int[N + 1][caps + 1];
+        int[] dp = new int[caps + 1];
         
         for(int item=1; item<=N; item++){
             for(int cap=1; cap<=caps; cap++){
-                int no = dp[item - 1][cap];
+                int no = dp[cap];
                 int yes = (cap >= wt[item - 1]) 
-                    ? dp[item][cap - wt[item - 1]] + cost[item - 1] 
+                    ? dp[cap - wt[item - 1]] + cost[item - 1] 
                     : -1;
                     
-                dp[item][cap] = Math.max(no, yes);
+                dp[cap] = Math.max(no, yes);
             }
         }
         
-        return dp[N][caps];
+        return dp[caps];
     }
 }
