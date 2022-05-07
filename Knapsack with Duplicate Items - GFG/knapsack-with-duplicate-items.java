@@ -32,26 +32,21 @@ class GFG{
 //User function Template for Java
 
 class Solution{
-    static int memo(int index, int cap, int cost[], int wt[], int N, int[][] dp){
-        if(index == N || cap == 0) return 0;
-        if(dp[index][cap] != -1) return dp[index][cap];
-        
-        int no = memo(index + 1, cap, cost, wt, N, dp);
-        int yes = (cap >= wt[index]) 
-            ? cost[index] + memo(index, cap - wt[index], cost, wt, N, dp) : -1;
-        
-        return dp[index][cap] = Math.max(yes, no);
-    }
-    
-    static int knapSack(int N, int cap, int cost[], int wt[])
+    static int knapSack(int N, int caps, int cost[], int wt[])
     {
-        int[][] dp = new int[N + 1][cap + 1];
-        for(int i=0; i<=N; i++){
-            for(int j=0; j<=cap; j++){
-                dp[i][j] = -1;
+        int[][] dp = new int[N + 1][caps + 1];
+        
+        for(int item=1; item<=N; item++){
+            for(int cap=1; cap<=caps; cap++){
+                int no = dp[item - 1][cap];
+                int yes = (cap >= wt[item - 1]) 
+                    ? dp[item][cap - wt[item - 1]] + cost[item - 1] 
+                    : -1;
+                    
+                dp[item][cap] = Math.max(no, yes);
             }
         }
         
-        return memo(0, cap, cost, wt, N, dp);
+        return dp[N][caps];
     }
 }
