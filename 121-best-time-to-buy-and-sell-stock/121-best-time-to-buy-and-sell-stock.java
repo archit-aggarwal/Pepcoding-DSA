@@ -2,12 +2,12 @@ class Solution {
     public int maxProfit(int[] prices) {
         int n = prices.length;
         
-        int selling = prices[n - 1], profit = 0;
+        int buying = prices[0], profit = 0;
         
-        for(int i=n-1; i>=0; i--){
-            selling = Math.max(selling, prices[i]);
+        for(int i=0; i<n; i++){
+            buying = Math.min(buying, prices[i]);
             
-            int buying = prices[i]; // Today - Potential Buying Day
+            int selling = prices[i]; // Today - Potential Selling Day
             
             profit = Math.max(profit, selling - buying);
         }
