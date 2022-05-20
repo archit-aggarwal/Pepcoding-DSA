@@ -6,6 +6,7 @@ class Solution {
     public int mod = 1000000007;
 
     // Time - O(N), Space - O(N) for Recursion Call Stack
+    
     public long countFriendsPairing(int n, long[] dp) {
         if (n == 0 || n == 1)
             return 1l;
