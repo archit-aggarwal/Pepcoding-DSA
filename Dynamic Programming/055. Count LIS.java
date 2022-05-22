@@ -1,5 +1,7 @@
 import java.util.*;
 
+// Leetcode: 673: https://leetcode.com/problems/number-of-longest-increasing-subsequence/
+
 class Solution {
     // Time - O(N * N), Space - O(N * 2)
     public int findNumberOfLIS(int[] nums) {
