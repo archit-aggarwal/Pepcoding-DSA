@@ -59,3 +59,37 @@ class Memoization {
         return helper(0, N - 2, nums, dp);
     }
 }
+
+class Tabulation {
+    // Time - O(N ^ 3), Space - O(N ^ 2) 2D DP
+    static int matrixMultiplication(int N, int nums[]) {
+        int[][] dp = new int[N][N];
+
+        for (int gap = 1; gap < N - 1; gap++) {
+            for (int l = 0, r = gap; r < N - 1; l++, r++) {
+
+                int minCost = Integer.MAX_VALUE;
+                // Creating partitions
+                for (int k = l; k < r; k++) {
+                    // Left Matrices -> Multiplication Min Cost
+                    int left = dp[l][k];
+                    // Right Matrices -> Multiplication Min Cost
+                    int right = dp[k + 1][r];
+                    // Left * Right Multiplication Cost
+                    int cost = left + (nums[l] * nums[k + 1] * nums[r + 1]) + right;
+                    minCost = Math.min(minCost, cost);
+                }
+
+                dp[l][r] = minCost;
+            }
+        }
+
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = 0; j < N - 1; j++) {
+                System.out.print(dp[i][j] + " ");
+            }
+            System.out.println();
+        }
+        return dp[0][N - 2];
+    }
+}
