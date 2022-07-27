@@ -19,6 +19,7 @@ class Solution {
         topo.append(src);
     }
 
+    @SuppressWarnings("unchecked")
     public String findOrder(String[] dict, int N, int K) {
         ArrayList<Character>[] adj = new ArrayList[26];
         for (int i = 0; i < 26; i++)

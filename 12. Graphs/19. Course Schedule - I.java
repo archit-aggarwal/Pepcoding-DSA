@@ -20,6 +20,7 @@ class Solution {
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     public boolean canFinish(int n, int[][] prerequisites) {
         ArrayList<Integer>[] adj = new ArrayList[n];
         for (int i = 0; i < n; i++)

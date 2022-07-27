@@ -44,6 +44,7 @@ class Solution {
         return -1;
     }
 
+    @SuppressWarnings("unchecked")
     public static int parallelCourses(int n, int[][] prerequisites) {
         ArrayList<Integer>[] adj = new ArrayList[n];
         for (int i = 0; i < n; i++)

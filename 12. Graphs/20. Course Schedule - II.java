@@ -45,6 +45,7 @@ class Solution {
         // if topological sort is not possible (all visited are not visited)
     }
 
+    @SuppressWarnings("unchecked")
     public int[] findOrder(int n, int[][] prerequisites) {
         // Topological Sort is Valid -> Return Any of Them
         // If not is not possible, then empty return array

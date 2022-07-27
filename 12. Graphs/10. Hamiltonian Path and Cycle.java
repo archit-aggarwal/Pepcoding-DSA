@@ -14,7 +14,6 @@ class Main {
     }
 
     // Time - O(Exponential) All Paths from Source to Destination
-
     public static void DFS(int src, boolean[] vis, ArrayList<Integer>[] graph, int visCount, String path) {
         if (vis[src] == true)
             return;
@@ -42,6 +41,7 @@ class Main {
         vis[src] = false;
     }
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -56,7 +56,6 @@ class Main {
             String[] parts = br.readLine().split(" ");
             int v1 = Integer.parseInt(parts[0]);
             int v2 = Integer.parseInt(parts[1]);
-            int wt = Integer.parseInt(parts[2]);
             graph[v1].add(v2);
             graph[v2].add(v1);
         }

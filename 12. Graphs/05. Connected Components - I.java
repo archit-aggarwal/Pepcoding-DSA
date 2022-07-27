@@ -48,6 +48,7 @@ class Main {
         System.out.println(components);
     }
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 

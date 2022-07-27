@@ -4,6 +4,7 @@ import java.util.*;
 
 // Time - O(N + E) DFS
 class Solution {
+    @SuppressWarnings("unchecked")
     public int makeConnected(int n, int[][] connections) {
         if (connections.length < n - 1)
             return -1; // To connect all nodes need at least n-1 edges
