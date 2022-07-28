@@ -12,6 +12,7 @@ class Solution {
         if (vis[src] == true)
             return;
         vis[src] = true;
+        // System.out.print(src + " ");
 
         for (Integer nbr : adj.get(src))
             topoSort(nbr, vis, adj);
@@ -52,6 +53,7 @@ class Solution {
             if (vis[topo[i]] == false) {
                 scc++;
                 DFS(topo[i], vis, rev);
+                // System.out.println();
             }
         }
         return scc;
