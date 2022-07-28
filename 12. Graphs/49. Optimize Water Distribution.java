@@ -32,7 +32,7 @@ class Solution {
             adj[pipe[1]].add(new Pair(pipe[0], pipe[2]));
         }
 
-        // Imaginary Node for Atleast Well
+        // Imaginary Node for Well
         for (int i = 0; i < n; i++) {
             adj[0].add(new Pair(i + 1, wells[i]));
             adj[i + 1].add(new Pair(0, wells[i]));
