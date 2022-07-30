@@ -9,6 +9,7 @@ class TestClass {
             parent = new int[n];
             Arrays.fill(parent, -1);
             rank = new int[n];
+            Arrays.fill(rank, 1);
         }
 
         public void union(int a, int b) {
