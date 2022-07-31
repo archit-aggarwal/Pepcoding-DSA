@@ -1,11 +1,10 @@
 import java.util.*;
+// GfG:
+// https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
 
-// Hackerearth: https://www.hackerearth.com/problem/algorithm/connected-components-in-a-graph/
+// Time = O(N + E) DSU
 
-// Time = O(N + AE) Where N = Number of Vertices, 
-// E = Edges, A = Inverse Ackerman Constant (= 4 for Very Large N)
-
-class TestClass {
+class Solution {
     static class DSU {
         int[] parent;
         int[] rank;
@@ -13,6 +12,7 @@ class TestClass {
         DSU(int n) {
             parent = new int[n];
             Arrays.fill(parent, -1);
+
             rank = new int[n];
             Arrays.fill(rank, 1);
         }
@@ -39,25 +39,23 @@ class TestClass {
         }
     }
 
-    public static void main(String args[]) throws Exception {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        DSU sets = new DSU(n + 1);
+    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
+        DSU sets = new DSU(V + 1);
 
-        int e = scn.nextInt();
-        while (e-- > 0) {
-            int a = scn.nextInt();
-            int b = scn.nextInt();
-            sets.union(a, b);
+        for (int a = 0; a < adj.size(); a++) {
+            for (Integer b : adj.get(a)) {
+                if (a > b)
+                    continue;
+                // If there is an edge a-b: It will appear two times in adjacency list
+                // If a -> b is an edge, then dont union again for b -> a
+
+                if (sets.find(a) == sets.find(b))
+                    return true;
+                sets.union(a, b);
+            }
         }
 
-        int components = 0;
-        for (int i = 1; i <= n; i++) {
-            if (sets.find(i) == i)
-                components++;
-        }
-
-        System.out.println(components);
-        scn.close();
+        return false;
     }
+
 }

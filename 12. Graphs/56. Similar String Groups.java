@@ -1,11 +1,9 @@
 import java.util.*;
+// Leetcode 839: https://leetcode.com/problems/similar-string-groups/
 
-// Hackerearth: https://www.hackerearth.com/problem/algorithm/connected-components-in-a-graph/
+// Time = O(N^2 * L) Where N = Number of Strings, L = Length of String
 
-// Time = O(N + AE) Where N = Number of Vertices, 
-// E = Edges, A = Inverse Ackerman Constant (= 4 for Very Large N)
-
-class TestClass {
+class Solution {
     static class DSU {
         int[] parent;
         int[] rank;
@@ -13,6 +11,7 @@ class TestClass {
         DSU(int n) {
             parent = new int[n];
             Arrays.fill(parent, -1);
+
             rank = new int[n];
             Arrays.fill(rank, 1);
         }
@@ -39,25 +38,31 @@ class TestClass {
         }
     }
 
-    public static void main(String args[]) throws Exception {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        DSU sets = new DSU(n + 1);
-
-        int e = scn.nextInt();
-        while (e-- > 0) {
-            int a = scn.nextInt();
-            int b = scn.nextInt();
-            sets.union(a, b);
+    public boolean isSimilar(String a, String b) {
+        int count = 0;
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) != b.charAt(i))
+                count++;
         }
+        if (count <= 2)
+            return true;
+        return false;
+    }
 
-        int components = 0;
-        for (int i = 1; i <= n; i++) {
+    public int numSimilarGroups(String[] strs) {
+        DSU sets = new DSU(strs.length);
+
+        for (int i = 0; i < strs.length; i++)
+            for (int j = i + 1; j < strs.length; j++)
+                if (isSimilar(strs[i], strs[j]) == true)
+                    sets.union(i, j);
+
+        int groups = 0;
+        for (int i = 0; i < strs.length; i++) {
             if (sets.find(i) == i)
-                components++;
+                groups++;
         }
 
-        System.out.println(components);
-        scn.close();
+        return groups;
     }
 }

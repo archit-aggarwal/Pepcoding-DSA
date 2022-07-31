@@ -1,11 +1,10 @@
 import java.util.*;
+// Leetcode 990:
+// https://leetcode.com/problems/satisfiability-of-equality-equations/
 
-// Hackerearth: https://www.hackerearth.com/problem/algorithm/connected-components-in-a-graph/
+// Time = O(N) Where N = Number of Equations
 
-// Time = O(N + AE) Where N = Number of Vertices, 
-// E = Edges, A = Inverse Ackerman Constant (= 4 for Very Large N)
-
-class TestClass {
+class Solution {
     static class DSU {
         int[] parent;
         int[] rank;
@@ -13,6 +12,7 @@ class TestClass {
         DSU(int n) {
             parent = new int[n];
             Arrays.fill(parent, -1);
+
             rank = new int[n];
             Arrays.fill(rank, 1);
         }
@@ -39,25 +39,25 @@ class TestClass {
         }
     }
 
-    public static void main(String args[]) throws Exception {
-        Scanner scn = new Scanner(System.in);
-        int n = scn.nextInt();
-        DSU sets = new DSU(n + 1);
+    public boolean equationsPossible(String[] equations) {
+        DSU sets = new DSU(26);
+        for (String eqn : equations) {
+            int left = eqn.charAt(0) - 'a';
+            int right = eqn.charAt(3) - 'a';
 
-        int e = scn.nextInt();
-        while (e-- > 0) {
-            int a = scn.nextInt();
-            int b = scn.nextInt();
-            sets.union(a, b);
+            if (eqn.charAt(1) == '=')
+                sets.union(left, right);
         }
 
-        int components = 0;
-        for (int i = 1; i <= n; i++) {
-            if (sets.find(i) == i)
-                components++;
+        for (String eqn : equations) {
+            int left = eqn.charAt(0) - 'a';
+            int right = eqn.charAt(3) - 'a';
+
+            if (eqn.charAt(1) == '!' && sets.find(left) == sets.find(right))
+                return false;
         }
 
-        System.out.println(components);
-        scn.close();
+        return true;
     }
+
 }
