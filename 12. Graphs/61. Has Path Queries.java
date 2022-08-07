@@ -71,8 +71,6 @@ class Solution {
 
             if (dsu.find(q.src) == dsu.find(q.nbr))
                 ans[q.idx] = true;
-            else
-                ans[q.idx] = false;
         }
         return ans;
     }
