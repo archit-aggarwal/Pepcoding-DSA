@@ -18,9 +18,13 @@ class Main {
         }
 
         public boolean isSmaller(int ci, int pi) {
-            if (data.get(ci) < data.get(pi)) {
+            Comparable obj1 = (Comparable) data.get(ci);
+            Comparable obj2 = (Comparable) data.get(pi);
+
+            if (obj1.compareTo(obj2) < 0) {
                 return true;
             }
+
             return false;
         }
 
@@ -53,12 +57,12 @@ class Main {
             int min = pi;
 
             int li = 2 * pi + 1;
-            if (li < size() && data.get(li) < data.get(min)) {
+            if (li < size() && isSmaller(li, min) == true) {
                 min = li;
             }
 
             int ri = 2 * pi + 2;
-            if (ri < size() && data.get(ri) < data.get(min)) {
+            if (ri < size() && isSmaller(ri, min) == true) {
                 min = ri;
             }
 
@@ -106,10 +110,10 @@ class Main {
     public static void main(String[] args) throws Exception {
         Scanner scn = new Scanner(System.in);
         int n = scn.nextInt();
-        PriorityQueue<Double> q = new PriorityQueue<>();
+        PriorityQueue<String> q = new PriorityQueue<>();
 
         for (int i = 0; i < n; i++) {
-            q.add(scn.nextDouble());
+            q.add(scn.next());
         }
 
         q.heapSort();
