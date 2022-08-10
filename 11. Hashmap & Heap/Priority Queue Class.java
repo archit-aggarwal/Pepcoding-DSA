@@ -2,12 +2,58 @@ import java.io.*;
 import java.util.*;
 
 class Main {
+    public static class Country implements Comparable<Country> {
+        String name;
+        int gold, silver, bronze;
+        int total;
+
+        Country() {
+        }
+
+        Country(String name, int gold, int silver, int bronze) {
+            this.gold = gold;
+            this.silver = silver;
+            this.bronze = bronze;
+            this.name = name;
+            this.total = gold + silver + bronze;
+        }
+
+        @Override
+        public int compareTo(Country other) {
+            return other.gold - this.gold;
+        }
+
+        @Override
+        public String toString() {
+            return (name + " : " + gold + ", " + silver + ", " + bronze);
+        }
+    }
+
+    public static class TotalMedalComparator implements Comparator<Country> {
+        @Override
+        public int compare(Country t, Country o) {
+            return (o.gold + o.silver + o.bronze) - (t.gold + t.silver + t.bronze);
+        }
+    }
+
+    public static class LexicographicalComparator implements Comparator<Country> {
+        @Override
+        public int compare(Country t, Country o) {
+            return t.name.compareTo(o.name);
+        }
+    }
 
     public static class PriorityQueue<T> {
         ArrayList<T> data;
+        Comparator comp;
 
         public PriorityQueue() {
             data = new ArrayList<>();
+        }
+
+        public PriorityQueue(Comparator comp) {
+            data = new ArrayList<>();
+            this.comp = comp;
         }
 
         public PriorityQueue(ArrayList<T> data) {
@@ -18,14 +64,22 @@ class Main {
         }
 
         public boolean isSmaller(int ci, int pi) {
-            Comparable obj1 = (Comparable) data.get(ci);
-            Comparable obj2 = (Comparable) data.get(pi);
+            if (comp == null) {
+                Comparable obj1 = (Comparable) data.get(ci);
+                Comparable obj2 = (Comparable) data.get(pi);
 
-            if (obj1.compareTo(obj2) < 0) {
-                return true;
+                if (obj1.compareTo(obj2) < 0) {
+                    return true;
+                }
+
+                return false;
+            } else {
+                if (comp.compare(data.get(ci), data.get(pi)) < 0) {
+                    return true;
+                }
+
+                return false;
             }
-
-            return false;
         }
 
         public void swap(int ci, int pi) {
@@ -98,7 +152,7 @@ class Main {
 
         public void heapSort() {
             while (size() > 0) {
-                System.out.print(remove() + " ");
+                System.out.println(remove() + " ");
             }
         }
 
@@ -110,10 +164,17 @@ class Main {
     public static void main(String[] args) throws Exception {
         Scanner scn = new Scanner(System.in);
         int n = scn.nextInt();
-        PriorityQueue<String> q = new PriorityQueue<>();
+        PriorityQueue<Country> q = new PriorityQueue<>(new LexicographicalComparator());
 
-        for (int i = 0; i < n; i++) {
-            q.add(scn.next());
+        Country[] obj = new Country[5];
+        obj[0] = new Country("India", 26, 80, 10);
+        obj[1] = new Country("Australia", 56, 50, 20);
+        obj[2] = new Country("England", 46, 20, 30);
+        obj[3] = new Country("USA", 106, 102, 40);
+        obj[4] = new Country("China", 76, 100, 50);
+
+        for (int i = 0; i < 5; i++) {
+            q.add(obj[i]);
         }
 
         q.heapSort();
